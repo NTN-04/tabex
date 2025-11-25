@@ -4,6 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thu vien TAB</title>
+    <link rel="stylesheet" href="/src/tabex.css" />
+    <style>
+      .tabex--active a {
+        color: brown;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <!-- Container -->
+    <ul id="tabs">
+      <li><a href="#tab1">Tab 1</a></li>
+      <li><a href="#tab2">Tab 2</a></li>
+      <li><a href="#tab3">Tab 3</a></li>
+    </ul>
+    <!-- Panel -->
+    <div id="tab1">Content Tab 1</div>
+    <div id="tab2">Content Tab 2</div>
+    <div id="tab3">Content Tab 3</div>
+
+    <!-- JS -->
+    <script src="/src/tabex.js"></script>
+    <script>
+      const tab = new Tabex("#tabs");
+    </script>
+  </body>
 </html>
