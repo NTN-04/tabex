@@ -23,10 +23,26 @@
     <div id="tab2">Content Tab 2</div>
     <div id="tab3">Content Tab 3</div>
 
+    <ul id="tabs2">
+      <li><a href="#tabA">Tab A</a></li>
+      <li><a href="#tabB">Tab B</a></li>
+      <li><a href="#tabC">Tab C</a></li>
+    </ul>
+    <!-- Panel -->
+    <div id="tabA">Content Tab A</div>
+    <div id="tabB">Content Tab B</div>
+    <div id="tabC">Content Tab C</div>
+
     <!-- JS -->
     <script src="/src/tabex.js"></script>
     <script>
-      const tab = new Tabex("#tabs");
+      const tab = new Tabex("#tabs", {
+        remember: true,
+      });
+
+      const tab2 = new Tabex("#tabs2", {
+        remember: true,
+      });
     </script>
   </body>
 </html>

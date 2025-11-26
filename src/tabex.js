@@ -1,11 +1,11 @@
-function Tabex(selector) {
+function Tabex(selector, option = {}) {
   this.container = document.querySelector(selector);
   if (!this.container) {
     console.error(`Tabex: No container found for selector ${selector}.`);
     return;
   }
 
-  this.tabs = Array.from(document.querySelectorAll("li a"));
+  this.tabs = Array.from(this.container.querySelectorAll("li a"));
   if (!this.tabs.length) {
     console.error(`Tabex: No tab found inside container`);
     return;
@@ -25,14 +25,33 @@ function Tabex(selector) {
 
   if (this.tabs.length !== this.panels.length) return;
 
+  this.opt = Object.assign(
+    {
+      remember: false,
+    },
+    option
+  );
+
+  this.paramKey = selector.replace(/[^a-zA-Z0-9]/g, "");
+
   this._originHtml = this.container.innerHTML;
-  console.log("🚀 ~ Tabex ~ this._originHtml:", this._originHtml);
   // Hàm Khởi tạo
   this._init();
 }
 
 Tabex.prototype._init = function () {
-  this._activeTab(this.tabs[0]);
+  const param = new URLSearchParams(location.search);
+  const tabSelector = param.get(this.paramKey);
+  const tabToActivate =
+    (this.opt.remember &&
+      tabSelector &&
+      this.tabs.find(
+        (tab) =>
+          tab.getAttribute("href").replace(/[^a-zA-Z0-9]/g, "") === tabSelector
+      )) ||
+    this.tabs[0];
+
+  this._activeTab(tabToActivate);
 
   this.tabs.forEach((tab) => {
     tab.onclick = (e) => this._handleClickTab(e, tab);
@@ -57,6 +76,14 @@ Tabex.prototype._activeTab = function (tab) {
 
   const panelActive = document.querySelector(tab.getAttribute("href"));
   panelActive.hidden = false;
+
+  // Lưu tab ở hash
+  if (this.opt.remember) {
+    const param = new URLSearchParams(location.search);
+    const paramValue = tab.getAttribute("href").replace(/[^a-zA-Z0-9]/g, "");
+    param.set(this.paramKey, paramValue);
+    history.replaceState(null, null, `?${param}`);
+  }
 };
 
 Tabex.prototype.switch = function (input) {
