@@ -1,4 +1,4 @@
-# Tabex.js
+# Hướng Dẫn Sử Dụng Thư Viện Tabex.js
 
 Một thư viện JavaScript nhẹ và đơn giản để tạo giao diện tab một cách dễ dàng.
 
@@ -12,8 +12,9 @@ Một thư viện JavaScript nhẹ và đơn giản để tạo giao diện tab 
 
 ### 1. Cài đặt
 
-Nhúng tệp `tabex.js` vào tệp HTML của bạn. 
+Tabex cung cấp một tệp JS nhỏ mà bạn có thể đưa trực tiếp vào thông qua liên kết CDN. Điều này giúp bạn dễ dàng tích hợp vào dự án và tùy chỉnh khi cần thiết. 
 
+Gắn tệp JavaScript Tabex vào dự án của bạn:
 ```html
 <body>
   ...
@@ -49,17 +50,31 @@ Tạo một danh sách các liên kết tab và một tập hợp các khối n�
 
 ### 3. Khởi tạo JavaScript
 
-Tạo một thực thể `Tabex` mới, truyền vào CSS selector (vd: #my-tabs) của vùng chứa thanh điều hướng tab.
+Tạo một thực thể `Tabex` mới, truyền vào CSS selector của vùng chứa thanh điều hướng tab.
+
+```javascript
+const myTabs = new Tabex("#my-tabs");
+```
+
+## Tùy chọn (Options)
+
+Bạn có thể truyền một đối tượng tùy chọn làm đối số thứ hai trong quá trình khởi tạo để tùy chỉnh hành vi.
 
 ```javascript
 const myTabs = new Tabex("#my-tabs", {
-  activeClassName: "active-tab", // class css của tab đang được active
-  remember: true, // ghi nhớ tab khi tải trang
+  activeClassName: "active-tab",
+  remember: true,
   onChange: (data) => {
     console.log(`Đã chuyển sang tab: ${data.tab.textContent}`);
-  }, // Hàm callback trả về {tab, panel}
+  },
 });
 ```
+
+| Tùy chọn          | Kiểu       | Mặc định          | Mô tả                                                                                                      |
+| ----------------- | ---------- | ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| `activeClassName` | `String`   | `'tabex--active'` | Class CSS được áp dụng cho thẻ `<li>` của tab đang hoạt động.                                              |
+| `remember`        | `Boolean`  | `false`           | Nếu là `true`, trạng thái tab đang hoạt động sẽ được lưu vào URL và khôi phục lại khi tải trang.           |
+| `onChange`        | `Function` | `null`            | Một hàm callback được thực thi sau khi một tab mới được kích hoạt. Nó nhận một đối tượng `{ tab, panel }`. |
 
 ## Các phương thức công khai
 
@@ -85,5 +100,3 @@ Xóa tất cả các trình lắng nghe sự kiện và khôi phục lại HTML 
 ```javascript
 myTabs.destroy();
 ```
-
-

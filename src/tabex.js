@@ -68,8 +68,8 @@ Tabex.prototype._init = function () {
 Tabex.prototype._handleClickTab = function (e, tab) {
   e.preventDefault();
   if (this.currentTab !== tab) {
-    this._activeTab(tab);
     this.currentTab = tab;
+    this._activeTab(tab);
   }
 };
 
@@ -123,8 +123,8 @@ Tabex.prototype.switch = function (input) {
   }
 
   if (this.currentTab !== tabToActive) {
-    this._activeTab(tabToActive);
     this.currentTab = tabToActive;
+    this._activeTab(tabToActive);
   }
 };
 

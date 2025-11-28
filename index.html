@@ -49,6 +49,7 @@
               <a href="#reviews"><i class="fas fa-comment-alt"></i> Reviews</a>
             </li>
           </ul>
+          <div class="active-line"></div>
         </div>
         <div class="panels">
           <div id="overview">
@@ -209,6 +210,10 @@
           </div>
         </div>
       </section>
+
+      <footer>
+        <p>Thư viên Tabex - <b>Nguyễn Trọng Nghĩa</b></p>
+      </footer>
     </div>
 
     <!-- JS -->
@@ -216,9 +221,7 @@
     <script>
       const tab = new Tabex("#tabs1", {
         remember: true,
-        onChange: (data) => {
-          console.log("Product Tab Changed:", data);
-        },
+        onChange: activeLine,
       });
 
       const tab2 = new Tabex("#tabs2", {
@@ -227,6 +230,17 @@
           console.log("Settings Tab Changed:", data);
         },
       });
+
+      // Tạo line cho tab active dạng ngang
+      function activeLine() {
+        const activeTab = tab.currentTab;
+        const tabLi = activeTab.closest("li");
+        const lineActive = tab.container.nextElementSibling;
+
+        lineActive.style.width = `${tabLi.offsetWidth}px`;
+        lineActive.style.transform = `translateX(${tabLi.offsetLeft}px)`;
+      }
+      activeLine();
     </script>
   </body>
 </html>
