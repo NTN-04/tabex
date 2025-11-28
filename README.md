@@ -18,7 +18,7 @@ Gắn tệp JavaScript Tabex vào dự án của bạn:
 ```html
 <body>
   ...
-  <script src="path/to/tabex.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/ntn-04/tabex/tabex.min.js"></script>
 </body>
 ```
 
